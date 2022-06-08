@@ -27,9 +27,11 @@ app.MapPost("/todo-items", async (TodoItem newVoodo, ITodoItemService service) =
     return Results.CreatedAtRoute($"todo-items/{createdTodoItem.Id}"); //if you follow this link you will get
     //to this new item
 });
+
 app.MapPut("/todo-items/{id}", (string id) => {}); //to update need id
 app.MapDelete("/todo-items/{id}", (string id) => {}); //to delete need id
 
 app.Run();
 
 
+//used swagger.io the way that we used postman, but it needs to be installed in terminal

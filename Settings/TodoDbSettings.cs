@@ -8,3 +8,5 @@ public class TodoDbSettings
 
     public string CollectionName { get; set; }
 }
+
+//connecting to the database
