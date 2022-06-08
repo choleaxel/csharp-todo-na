@@ -1,6 +1,6 @@
 namespace Settings;
 
-public class TodoDbStrings
+public class TodoDbSettings
 {
     public string ConnectionString { get; set; }
 
