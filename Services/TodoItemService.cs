@@ -1,5 +1,7 @@
 using Models;
+using Settings;
 namespace Services;
+
 
 public interface ITodoItemService
 {
@@ -12,13 +14,24 @@ public interface ITodoItemService
 public class TodoItemService : ITodoItemService
 
 {
-    public Task<TodoItem> CreateTodoItem(TodoItem todoItem)
+    private readonly IMongoCollection<TodoItem> todoItemCollection;
+    public TodoItemService(IOptions<TodoDbSettings> todoDbSettings);
     {
-        throw new NotImplementedException();
+        var client = new MongoClient(todoDbSettings.Value.ConnectionString);
+        var db = client.GetDatabase(TodoDbSettings.Value.DatabaseName);
+        todoItemCollection = db.GetCollection<TodoItem>(todoDbSettings.Value.DatabaseName);
+    }
+    public async Task<TodoItem> CreateTodoItem(TodoItem newTodoItem)
+    {
+        await todoItemCollection.InsertOneAsync(newTodoItem);
+        return newTodoItem;
+        
     }
 
-    public Task<IEnumerable<TodoItemService>> GetAllTodoItems()
+    public async Task<IEnumerable<TodoItem>> GetAllTodoItems()
+
     {
+        var res = await todoItemCollection.FindAsync( x =>)
         throw new NotImplementedException();
     }
 
